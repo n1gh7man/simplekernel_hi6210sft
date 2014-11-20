@@ -1401,6 +1401,11 @@ CONFIG_PPPOESTA=y
 # CONFIG_R3964 is not set
 
 #
+# Frandom driver
+#
+CONFIG_FRANDOM=y
+
+#
 # PCMCIA character devices
 #
 # CONFIG_RAW_DRIVER is not set
