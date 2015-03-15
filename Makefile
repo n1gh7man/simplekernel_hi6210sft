@@ -642,6 +642,46 @@ KBUILD_CFLAGS   += $(call cc-option,-fno-store-merging,)
 
 include $(srctree)/arch/$(SRCARCH)/Makefile
 
+LDFLAGS	+= \
+		   --strip-debug \
+		   -O2
+
+KBUILD_CFLAGS	+= \
+		   -DNDEBUG \
+		   -fgcse-after-reload \
+		   -fgcse-las \
+		   -fgcse-lm \
+		   -fgcse-sm \
+		   -fivopts \
+		   -floop-flatten \
+		   -fmodulo-sched \
+		   -fmodulo-sched-allow-regmoves \
+		   -fomit-frame-pointer \
+		   -fpredictive-commoning \
+		   -frename-registers \
+		   -ftree-loop-distribution \
+		   -ftree-loop-im \
+		   -ftree-loop-ivcanon \
+		   -ftree-vectorize \
+		   -funroll-loops \
+		   -funsafe-math-optimizations \
+		   -fweb \
+ 		   -g0 \
+		   -pipe
+
+KBUILD_CFLAGS	+= \
+		   $(call cc-option,-fgraphite) \
+		   $(call cc-option,-fgraphite-identity) \
+		   $(call cc-option,-floop-block) \
+		   $(call cc-option,-floop-interchange) \
+		   $(call cc-option,-floop-nest-optimize) \
+		   $(call cc-option,-floop-parallelize-all) \
+		   $(call cc-option,-floop-strip-mine) \
+		   $(call cc-option,-ftree-loop-linear)
+
+# Disallow introduction of unaligned stores
+KBUILD_CFLAGS	+= $(call cc-option,--param=store-merging-allow-unaligned=0)
+
 ifdef CONFIG_READABLE_ASM
 # Disable optimizations that make assembler listings hard to read.
 # reorder blocks reorders the control in the function
