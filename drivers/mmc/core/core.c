@@ -77,7 +77,7 @@ static const unsigned freqs_emmc[] = { 100000, 100000, 100000, 100000 };
  */
 
 bool use_spi_crc = 0;
-module_param(use_spi_crc, bool, 0);
+module_param(use_spi_crc, bool, 0644);
 
 /*
  * We normally treat cards as removed during suspend if they are not
