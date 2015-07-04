@@ -166,7 +166,11 @@ static void __init acpi_request_region (struct acpi_generic_address *gas,
 	if (!addr || !length)
 		return;
 
-	acpi_reserve_region(addr, length, gas->space_id, 0, desc);
+	/* Resources are never freed */
+	if (gas->space_id == ACPI_ADR_SPACE_SYSTEM_IO)
+		request_region(addr, length, desc);
+	else if (gas->space_id == ACPI_ADR_SPACE_SYSTEM_MEMORY)
+		request_mem_region(addr, length, desc);
 }
 
 static int __init acpi_reserve_resources(void)
@@ -201,7 +205,11 @@ static int __init acpi_reserve_resources(void)
 
 	return 0;
 }
+<<<<<<< HEAD
 device_initcall(acpi_reserve_resources);
+=======
+fs_initcall_sync(acpi_reserve_resources);
+>>>>>>> 62bdbcf... ACPI / PNP: Reserve ACPI resources at the fs_initcall_sync stage
 
 void acpi_os_printf(const char *fmt, ...)
 {
