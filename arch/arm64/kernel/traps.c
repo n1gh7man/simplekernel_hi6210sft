@@ -577,14 +577,10 @@ asmlinkage void bad_el0_sync(struct pt_regs *regs, int reason, unsigned int esr)
 	info.si_code  = ILL_ILLOPC;
 	info.si_addr  = pc;
 
-<<<<<<< HEAD
 #ifdef CONFIG_HISI_RDR
 	arm_exc_type = DUMP_ARM_VEC_RESET;
 #endif
-	arm64_notify_die("Oops - bad mode", regs, &info, 0);
-=======
 	force_sig_info(info.si_signo, &info, current);
->>>>>>> e5471de... arm64: avoid returning from bad_mode
 }
 
 void __pte_error(const char *file, int line, unsigned long val)

@@ -765,8 +765,6 @@ static netdev_tx_t eth_start_xmit(struct sk_buff *skb,
 
 	req->length = length;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 	/* throttle highspeed IRQ rate back slightly */
 	if (gadget_is_dualspeed(dev->gadget) &&
 			 (dev->gadget->speed == USB_SPEED_HIGH)) {
@@ -780,18 +778,7 @@ static netdev_tx_t eth_start_xmit(struct sk_buff *skb,
 	} else {
 		req->no_interrupt = 0;
 	}
-=======
-	/* throttle high/super speed IRQ rate back slightly */
-	if (gadget_is_dualspeed(dev->gadget))
-		req->no_interrupt = (((dev->gadget->speed == USB_SPEED_HIGH ||
-				       dev->gadget->speed == USB_SPEED_SUPER)) &&
-					!list_empty(&dev->tx_reqs))
-			? ((atomic_read(&dev->tx_qlen) % qmult) != 0)
-			: 0;
->>>>>>> 5c82a63... usb: gadget: function: u_ether: don't starve tx request queue
 
-=======
->>>>>>> 990d13a... usb: gadget: u_ether: remove interrupt throttling
 	retval = usb_ep_queue(in, req, GFP_ATOMIC);
 	switch (retval) {
 	default:
