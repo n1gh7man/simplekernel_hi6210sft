@@ -382,6 +382,13 @@ CONFIG_PM_CLK=y
 CONFIG_CPU_PM=y
 # CONFIG_SUSPEND_TIME is not set
 
+
+#
+# Hotplugging support
+#
+CONFIG_THUNDERPLUG_CONTROL=y
+
+
 #
 # CPU Frequency scaling
 #
