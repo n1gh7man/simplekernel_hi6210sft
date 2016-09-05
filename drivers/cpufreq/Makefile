@@ -18,6 +18,8 @@ obj-$(CONFIG_CPU_FREQ_GOV_DESPAIR)	+= cpufreq_despair.o
 obj-$(CONFIG_CPU_FREQ_GOV_WHEATLEY)	+= cpufreq_wheatley.o
 obj-$(CONFIG_CPU_FREQ_GOV_IRONACTIVE)	+= cpufreq_ironactive.o
 obj-$(CONFIG_CPU_FREQ_GOV_OPTDEMAND)   += cpufreq_optdemand.o
+obj-$(CONFIG_CPU_FREQ_GOV_SMARTMAX)	+= cpufreq_smartmax_gov.o
+obj-$(CONFIG_CPU_FREQ_GOV_PMC)		+= cpufreq_pmc.o
 
 # CPUfreq cross-arch helpers
 obj-$(CONFIG_CPU_FREQ_TABLE)		+= freq_table.o
