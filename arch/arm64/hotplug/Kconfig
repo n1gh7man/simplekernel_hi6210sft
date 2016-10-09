@@ -2,3 +2,10 @@ config THUNDERPLUG_CONTROL
 	bool "Enable plugging down/up of cores based on load per core"
 	help
 	  This driver hotplugs cpu cores based on per-core load
+
+config INTELLI_PLUG
+        bool "Enable intelli-plug cpu hotplug driver"
+        default n
+        help
+          Generic Intelli-plug cpu hotplug driver for ARM SOCs
+
