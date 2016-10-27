@@ -233,6 +233,8 @@ static int blkcipher_walk_next(struct blkcipher_desc *desc,
 		return blkcipher_walk_done(desc, walk, -EINVAL);
 	}
 
+	bsize = min(walk->blocksize, n);
+
 	walk->flags &= ~(BLKCIPHER_WALK_SLOW | BLKCIPHER_WALK_COPY |
 			 BLKCIPHER_WALK_DIFF);
 	if (!scatterwalk_aligned(&walk->in, walk->alignmask) ||
@@ -245,7 +247,10 @@ static int blkcipher_walk_next(struct blkcipher_desc *desc,
 		}
 	}
 
+<<<<<<< HEAD
 	bsize = min(walk->walk_blocksize, n);
+=======
+>>>>>>> 0b3918f... crypto: skcipher - Fix blkcipher walk OOM crash
 	n = scatterwalk_clamp(&walk->in, n);
 	n = scatterwalk_clamp(&walk->out, n);
 
