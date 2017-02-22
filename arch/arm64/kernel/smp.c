@@ -528,15 +528,18 @@ static unsigned long backtrace_flag;
 
 void smp_send_cpus_backtrace(struct pt_regs *regs)
 {
-	unsigned int this_cpu = smp_processor_id();
+	unsigned int this_cpu;
 	int i;
 
-	if (test_and_set_bit(0, &backtrace_flag))
+	this_cpu = get_cpu();;
+	if (test_and_set_bit(0, &backtrace_flag)) {
 		/*
 		 * If there is already a trigger_all_cpu_backtrace() in progress
 		 * (backtrace_flag == 1), don't output double cpu dump infos.
 		 */
+		put_cpu();
 		return;
+	}
 
 	cpumask_copy(&backtrace_mask, cpu_online_mask);
 	cpu_clear(this_cpu, backtrace_mask);
@@ -548,6 +551,7 @@ void smp_send_cpus_backtrace(struct pt_regs *regs)
 	pr_info("\nsending IPI to all other CPUs (%d online):\n", num_online_cpus());
 	smp_cross_call(&backtrace_mask, IPI_CPU_BACKTRACE);
 
+	put_cpu();
 	/* Wait for up to 10 seconds for all other CPUs to do the backtrace */
 	for (i = 0; i < 10 * 1000; i++) {
 		if (cpumask_empty(&backtrace_mask))
