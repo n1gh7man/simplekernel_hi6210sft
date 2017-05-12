@@ -301,6 +301,7 @@ config CPU_FREQ_GOV_OPTDEMAND
 
 	  If in doubt, say N.
 
+<<<<<<< HEAD
 config CPU_FREQ_GOV_LIONFISH
 	tristate "'lionfish' governor"
 	depends on CPU_FREQ
@@ -357,6 +358,13 @@ config CPU_FREQ_GOV_IRONACTIVE
 	  module will be called cpufreq_ironactive.
 
 	  If in doubt, say N.
+
+config FINGERPRINT_BOOST
+	bool "Fingerprint Boost"
+	default y
+	help
+	  Boosts available CPUs to max frequency on fingerprint sensor input.
+
 
 config GENERIC_CPUFREQ_CPU0
 	tristate "Generic CPU0 cpufreq driver"
