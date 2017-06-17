@@ -79,7 +79,8 @@ out:
 static int soc_compr_open_fe(struct snd_compr_stream *cstream)
 {
 	struct snd_soc_pcm_runtime *fe = cstream->private_data;
-	struct snd_pcm_substream *fe_substream = fe->pcm->streams[0].substream;
+	struct snd_pcm_substream *fe_substream =
+		 fe->pcm->streams[cstream->direction].substream;
 	struct snd_soc_platform *platform = fe->platform;
 	struct snd_soc_dai *cpu_dai = fe->cpu_dai;
 	struct snd_soc_dai *codec_dai = fe->codec_dai;
@@ -450,7 +451,8 @@ static int soc_compr_set_params_fe(struct snd_compr_stream *cstream,
 					struct snd_compr_params *params)
 {
 	struct snd_soc_pcm_runtime *fe = cstream->private_data;
-	struct snd_pcm_substream *fe_substream = fe->pcm->streams[0].substream;
+	struct snd_pcm_substream *fe_substream =
+		 fe->pcm->streams[cstream->direction].substream;
 	struct snd_soc_platform *platform = fe->platform;
 	int ret = 0, stream;
 
