@@ -589,6 +589,7 @@ asmlinkage void __init start_kernel(void)
 #ifdef CONFIG_PASR
 	early_pasr_setup();
 #endif
+	add_device_randomness(command_line, strlen(command_line));
 	mm_init_owner(&init_mm, &init_task);
 	mm_init_cpumask(&init_mm);
 	setup_command_line(command_line);
