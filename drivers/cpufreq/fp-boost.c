@@ -28,6 +28,7 @@
 
 #include <linux/cpu.h>
 #include <linux/cpufreq.h>
+#include <linux/hw_lcd_common.h>
 #include <linux/input.h>
 #include <linux/slab.h>
 
@@ -143,8 +144,12 @@ static void cpu_fp_input_event(struct input_handle *handle, unsigned int type,
 		unsigned int code, int value)
 {
 	struct boost_policy *b = boost_policy_g;
+	const int display_on = lcd_pwr_status.panel_power_on;
 	struct fp_config *fp = &b->fp;
 	uint32_t state;
+
+	if (display_on == 1)
+		return;
 
 	state = get_boost_state(b);
 
