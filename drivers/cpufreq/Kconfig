@@ -135,6 +135,11 @@ config CPU_FREQ_DEFAULT_GOV_BIOSHOCK
 	select CPU_FREQ_GOV_BIOSHOCK
 	help
 	  Default governor of BioShock kernel
+
+config CPU_FREQ_DEFAULT_GOV_IMPULSE
+	bool "impulse"
+	select CPU_FREQ_GOV_IMPULSE
+	help
 	  
 endchoice
 
@@ -292,6 +297,10 @@ config CPU_FREQ_GOV_BIOSHOCK
 	depends on CPU_FREQ
 	help
 	  'bioshock' - More aggressive version of conservative
+
+config CPU_FREQ_GOV_IMPULSE
+	tristate "'impulse' cpufreq governor"
+	depends on CPU_FREQ
 
 config GENERIC_CPUFREQ_CPU0
 	tristate "Generic CPU0 cpufreq driver"
