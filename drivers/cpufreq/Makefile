@@ -109,3 +109,5 @@ obj-$(CONFIG_SPARC_US3_CPUFREQ)		+= sparc-us3-cpufreq.o
 obj-$(CONFIG_UNICORE32)			+= unicore2-cpufreq.o
 obj-$(CONFIG_HI6XXX_CPUFREQ)        += hi6xxx_cpufreq.o
 obj-$(CONFIG_HI6XXX_DT_CPUFREQ)     += hi6xxx_cpufreq_dt.o
+obj-$(CONFIG_LAZYPLUG)			+= lazyplug.o
+CFLAGS_lazyplug.o			+= -finline-functions
