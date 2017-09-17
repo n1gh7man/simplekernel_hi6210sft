@@ -438,6 +438,7 @@ CONFIG_ARM64_CPU_SUSPEND=y
 # Hotplugging
 #
 CONFIG_ASMP=y
+CONFIG_POWERSUSPEND_NEW=y
 
 #
 # CPU Power Management
