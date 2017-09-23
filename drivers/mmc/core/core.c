@@ -75,7 +75,7 @@ static const unsigned freqs_emmc[] = { 100000, 100000, 100000, 100000 };
  * performance cost, and for other reasons may not always be desired.
  * So we allow it it to be disabled.
  */
-<<<<<<< HEAD
+
 bool use_spi_crc = 0;
 module_param(use_spi_crc, bool, 0);
 

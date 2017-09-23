@@ -511,52 +511,6 @@ static inline void init_hrtick(void)
 }
 #endif	/* CONFIG_SCHED_HRTICK */
 
-void wake_q_add(struct wake_q_head *head, struct task_struct *task)
-{
-	struct wake_q_node *node = &task->wake_q;
-
-	/*
-	 * Atomically grab the task, if ->wake_q is !nil already it means
-	 * its already queued (either by us or someone else) and will get the
-	 * wakeup due to that.
-	 *
-	 * This cmpxchg() implies a full barrier, which pairs with the write
-	 * barrier implied by the wakeup in wake_up_list().
-	 */
-	if (cmpxchg(&node->next, NULL, WAKE_Q_TAIL))
-		return;
-
-	get_task_struct(task);
-
-	/*
-	 * The head is context local, there can be no concurrency.
-	 */
-	*head->lastp = node;
-	head->lastp = &node->next;
-}
-
-void wake_up_q(struct wake_q_head *head)
-{
-	struct wake_q_node *node = head->first;
-
-	while (node != WAKE_Q_TAIL) {
-		struct task_struct *task;
-
-		task = container_of(node, struct task_struct, wake_q);
-		BUG_ON(!task);
-		/* task can safely be re-inserted now */
-		node = node->next;
-		task->wake_q.next = NULL;
-
-		/*
-		 * wake_up_process() implies a wmb() to pair with the queueing
-		 * in wake_q_add() so as not to miss wakeups.
-		 */
-		wake_up_process(task);
-		put_task_struct(task);
-	}
-}
-
 /*
  * resched_task - mark a task 'to be rescheduled now'.
  *
@@ -2632,9 +2586,8 @@ void calc_load_exit_idle(void)
 	struct rq *this_rq = this_rq();
 
 	/*
-	 * If we're still before the pending sample window, we're done.
+	 * If we're still before the sample window, we're done.
 	 */
-	this_rq->calc_load_update = calc_load_update;
 	if (time_before(jiffies, this_rq->calc_load_update))
 		return;
 
@@ -2643,6 +2596,7 @@ void calc_load_exit_idle(void)
 	 * accounted through the nohz accounting, so skip the entire deal and
 	 * sync up for the next window.
 	 */
+	this_rq->calc_load_update = calc_load_update;
 	if (time_before(jiffies, this_rq->calc_load_update + 10))
 		this_rq->calc_load_update += LOAD_FREQ;
 }
@@ -3081,6 +3035,7 @@ unsigned long long task_delta_exec(struct task_struct *p)
 	unsigned long flags;
 	struct rq *rq;
 	u64 ns = 0;
+
 	rq = task_rq_lock(p, &flags);
 	ns = do_task_delta_exec(p, rq);
 	task_rq_unlock(rq, p, &flags);
