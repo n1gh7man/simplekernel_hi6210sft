@@ -382,13 +382,6 @@ CONFIG_PM_CLK=y
 CONFIG_CPU_PM=y
 # CONFIG_SUSPEND_TIME is not set
 
-
-#
-# Hotplugging support
-#
-CONFIG_THUNDERPLUG_CONTROL=y
-
-
 #
 # CPU Frequency scaling
 #
@@ -449,6 +442,7 @@ CONFIG_ARM64_CPU_SUSPEND=y
 #
 CONFIG_ASMP=y
 CONFIG_POWERSUSPEND_NEW=y
+CONFIG_THUNDERPLUG_CONTROL=y
 
 #
 # CPU Power Management
