@@ -48,6 +48,7 @@ core-y		+= arch/arm64/kernel/ arch/arm64/mm/
 core-$(CONFIG_ASMP)	+= arch/arm64/hotplug/autosmp/
 core-$(CONFIG_KVM) += arch/arm64/kvm/
 core-$(CONFIG_CRYPTO) += arch/arm64/crypto/
+core-$(CONFIG_INTELLI_PLUG)	+= arch/arm64/hotplug/intelli_plug/
 core-$(CONFIG_THUNDERPLUG_CONTROL) += arch/arm64/hotplug/
 libs-y		:= arch/arm64/lib/ $(libs-y)
 

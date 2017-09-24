@@ -1,0 +1,16 @@
+config INTELLI_PLUG
+        bool "Enable intelli-plug cpu hotplug driver"
+        default y
+        help
+          Generic Intelli-plug cpu hotplug driver for ARM SOCs
+
+config INTELLI_PLUG_CPUS
+	int "Maximum number of CPUs (4 or 8) (expremental)"
+	range 4 8
+	depends on INTELLI_PLUG
+	default "8"
+
+config INTELLI_PLUG_PERF_BOOST
+        bool "perf_boost sysfs entry"
+	depends on INTELLI_PLUG
+        default y
