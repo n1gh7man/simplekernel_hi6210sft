@@ -49,6 +49,10 @@
 #include <linux/hisi/pm/pwrctrl_multi_memcfg.h>
 #endif
 
+#ifdef CONFIG_THUNDERPLUG_CONTROL
+EXPORT_SYMBOL_GPL(sched_set_boost);
+#endif
+
 #if defined(CONFIG_ARCH_HI3XXX)||defined(CONFIG_ARCH_HI6XXX)
 /* Add apportunity to config how to placement the task
  * when task fork.
