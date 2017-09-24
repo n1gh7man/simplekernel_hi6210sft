@@ -69,7 +69,6 @@ struct hwifi_elements_stru
 #pragma pack()
 
 static const uint8 broadcast[6] = {0xff, 0xff, 0xff, 0xff, 0xff, 0xff};
-static const uint8 zeroaddr[6] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
 
 
 uint32 band_5g_enabled = FALSE;  /* TBD 5G使能开关，当前默认开启，发布时需要修改为默认关闭 */
