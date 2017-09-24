@@ -25,6 +25,7 @@
 #include <linux/list.h>
 #include <linux/printk.h>
 #include <linux/hrtimer.h>
+#include <linux/powersuspend.h>
 #include "governor.h"
 
 static struct class *devfreq_class;

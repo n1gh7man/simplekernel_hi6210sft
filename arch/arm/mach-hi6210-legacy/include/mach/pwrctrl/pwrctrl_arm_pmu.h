@@ -30,16 +30,36 @@
 #define ARM_PMU_ACPU1_ADDR                      (0xF6593000)
 #define ARM_PMU_ACPU2_ADDR                      (0xF6595000)
 #define ARM_PMU_ACPU3_ADDR                      (0xF6597000)
+
+//#if CONFIG_INTELLI_PLUG_CPUS == 8
+#define ARM_PMU_ACPU4_ADDR                      (0xF6599000)
+#define ARM_PMU_ACPU5_ADDR                      (0xF659B000)
+#define ARM_PMU_ACPU6_ADDR                      (0xF659D000)
+#define ARM_PMU_ACPU7_ADDR                      (0xF659F000)
+//#endif
+
 #else 
 #define ARM_PMU_ACPU0_ADDR                      (0xF6511000)
 #define ARM_PMU_ACPU1_ADDR                      (0xF6513000)
 #define ARM_PMU_ACPU2_ADDR                      (0xF6515000)
 #define ARM_PMU_ACPU3_ADDR                      (0xF6517000)
+
+//#if CONFIG_INTELLI_PLUG_CPUS == 8
+#define ARM_PMU_ACPU4_ADDR                      (0xF6519000)
+#define ARM_PMU_ACPU5_ADDR                      (0xF651B000)
+#define ARM_PMU_ACPU6_ADDR                      (0xF651D000)
+#define ARM_PMU_ACPU7_ADDR                      (0xF651F000)
+//#endif
+
 #endif
 
 #define ARM_PMU_ACPU_SIZE                       (0x2000)
-#define ARM_ACPU_CORE_NUM                       (0x4)
 
+//#if CONFIG_INTELLI_PLUG_CPUS == 8
+#define ARM_ACPU_CORE_NUM                       (0x8)
+//#else
+//#define ARM_ACPU_CORE_NUM                       (0x4)
+//#endif
 
 
 // These functions are used to get common cpu load.
