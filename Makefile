@@ -644,7 +644,7 @@ include $(srctree)/arch/$(SRCARCH)/Makefile
 
 LDFLAGS	+= \
 		   --strip-debug \
-		   -O2
+		   -O3
 
 KBUILD_CFLAGS	+= \
 		   -DNDEBUG \
