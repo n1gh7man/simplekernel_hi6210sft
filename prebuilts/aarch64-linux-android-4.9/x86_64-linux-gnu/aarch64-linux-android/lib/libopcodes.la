@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/cl3kener/android/toolchain/uber/out/aarch64-linux-android-4.9/x86_64-linux-gnu/aarch64-linux-android/lib'
+libdir='/home/matthewdalex/android/uberbuild/out/aarch64-linux-android-4.9/x86_64-linux-gnu/aarch64-linux-android/lib'

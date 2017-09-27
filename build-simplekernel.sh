@@ -34,20 +34,20 @@ nocol='\033[0m'         # Default
 #export PATH=$PATH:$LOCAL_DIR/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
 
 # UberTC compiler
-#export PATH=$PATH:$LOCAL_DIR/prebuilts/aarch64-linux-android-4.9/bin
+export PATH=$PATH:$LOCAL_DIR/prebuilts/aarch64-linux-android-4.9/bin
 
 #Linaro 7.2.1
-export PATH=$PATH:$LOCAL_DIR/prebuilts/aarch64-linaro-linux-android/bin
+#export PATH=$PATH:$LOCAL_DIR/prebuilts/aarch64-linux-android-7.x/bin
 
 # Prepare to compile
-export CROSS_COMPILE="aarch64-linaro-linux-android-"
+export CROSS_COMPILE="aarch64-linux-android-"
 
 
 # Compilation Scripts Are Below
 compile_kernel ()
 {
 echo -e "$White***********************************************"
-echo "               Compiling SimpleKernel              "
+echo "         *      Compiling SimpleKernel             * "
 echo -e "***********************************************$nocol"
 make ARCH=arm64 distclean
 mkdir -p out
