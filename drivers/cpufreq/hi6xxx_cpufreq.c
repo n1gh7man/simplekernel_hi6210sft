@@ -344,13 +344,19 @@ static int _get_cluster_clk_and_freq_table(struct device *cpu_dev)
 				__func__, cpu_dev->id, ret);
 		goto atomic_dec;
 	}
-
-	ret = opp_init_cpufreq_table(cpu_dev, &freq_table[cluster]);
-	if (ret) {
-		dev_err(cpu_dev, "%s: failed to init cpufreq table, cpu: %d, err: %d\n",
-				__func__, cpu_dev->id, ret);
-		goto atomic_dec;
+	freq_table[cluster] = kzalloc(sizeof(struct cpufreq_frequency_table) * 7, GFP_KERNEL);
+    if (!freq_table) {
+        dev_warn(dev, "%s: Unable to allocate frequency table\n", __func__);
+        return -ENOMEM;
 	}
+	
+	freq_table[cluster][0].frequency = 208;
+    freq_table[cluster][1].frequency = 432;
+    freq_table[cluster][2].frequency = 729;
+    freq_table[cluster][3].frequency = 960;
+    freq_table[cluster][4].frequency = 1200;
+    freq_table[cluster][5].frequency = 1500;
+    freq_table[cluster][6].frequency = CPUFREQ_TABLE_END;
 
 	clk[cluster] = clk_get_sys(NULL, name);
 	if (!IS_ERR(clk[cluster])) {
