@@ -14,10 +14,45 @@
 #
 # Please maintain this if you use this script or any part of it
 
+# FORMATS THE TIME
+function format_time() {
+    MINS=$(((${1} - ${2}) / 60))
+    SECS=$(((${1} - ${2}) % 60))
+    if [[ ${MINS} -ge 60 ]]; then
+        HOURS=$((${MINS}/  60))
+        MINS=$((${MINS} % 60))
+    fi
+
+    if [[ ${HOURS} -eq 1 ]]; then
+        TIME_STRING+="1 HOUR, "
+    elif [[ ${HOURS} -ge 2 ]]; then
+        TIME_STRING+="${HOURS} HOURS, "
+    fi
+
+    if [[ ${MINS} -eq 1 ]]; then
+        TIME_STRING+="1 MINUTE"
+    else
+        TIME_STRING+="${MINS} MINUTES"
+    fi
+
+    if [[ ${SECS} -eq 1 && -n ${HOURS} ]]; then
+        TIME_STRING+=", AND 1 SECOND"
+    elif [[ ${SECS} -eq 1 && -z ${HOURS} ]]; then
+        TIME_STRING+=" AND 1 SECOND"
+    elif [[ ${SECS} -ne 1 && -n ${HOURS} ]]; then
+        TIME_STRING+=", AND ${SECS} SECONDS"
+    elif [[ ${SECS} -ne 1 && -z ${HOURS} ]]; then
+        TIME_STRING+=" AND ${SECS} SECONDS"
+    fi
+
+    echo ${TIME_STRING}
+}
+
 # Init Script
 LOCAL_DIR=`pwd`
-ZIMAGE=$LOCAL_DIR/out/arch/arm64/boot/Image
-BUILD_START=$(date +"%s")
+START=$(date +"%s")
+FINAL_IMAGE=out/arch/arm64/boot/Image
+MAKEFILE=Makefile
 
 # Color Code Script
 Black='\e[0;30m'        # Black
@@ -30,14 +65,9 @@ Cyan='\e[0;36m'         # Cyan
 White='\e[0;37m'        # White
 nocol='\033[0m'         # Default
 
-# Standard GCC compiler
-#export PATH=$PATH:$LOCAL_DIR/prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin
 
-# UberTC compiler
+# UberTC compiler path
 export PATH=$PATH:$LOCAL_DIR/prebuilts/aarch64-linux-android-4.9/bin
-
-#Linaro 7.2.1
-#export PATH=$PATH:$LOCAL_DIR/prebuilts/aarch64-linux-android-7.x/bin
 
 # Prepare to compile
 export CROSS_COMPILE="aarch64-linux-android-"
@@ -46,19 +76,21 @@ export CROSS_COMPILE="aarch64-linux-android-"
 # Compilation Scripts Are Below
 compile_kernel ()
 {
-echo -e "$White***********************************************"
+echo -e "$Cyan***********************************************"
 echo "         *      Compiling SimpleKernel             * "
 echo -e "***********************************************$nocol"
 make ARCH=arm64 distclean
 mkdir -p out
 make ARCH=arm64 O=out hisi_hi6210sft_defconfig
 make ARCH=arm64 O=out -j4
-if ! [ -a $ZIMAGE ];
+if ! [ -a $MAKEFILE ];
 then
-echo -e "$Red Kernel Compilation failed! Fix the errors! $nocol"
+echo -e "$Red This must be run in a kernel tree! $nocol"
 exit 1
 fi
 }
+
+
 
 # Finalizing Script Below
 case $1 in
@@ -69,6 +101,8 @@ make ARCH=arm64 distclean
 compile_kernel
 ;;
 esac
-BUILD_END=$(date +"%s")
-DIFF=$(($BUILD_END - $BUILD_START))
-echo -e "$Yellow Build completed in $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) seconds.$nocol"
+END=$(date +"%s")
+[[ -f ${FINAL_IMAGE} ]] && echo "${GRN}BUILT IN $(format_time ${END} ${START})${RST}\n
+${BOLD}IMAGE:${RST} ${FINAL_IMAGE}\n
+${BOLD}VERSION:${RST} $(cat out/include/config/kernel.release)" \
+                      || echo -e "$Red Kernel build failed! $nocol"
