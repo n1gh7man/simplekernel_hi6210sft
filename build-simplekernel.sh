@@ -102,7 +102,7 @@ compile_kernel
 ;;
 esac
 END=$(date +"%s")
-[[ -f ${FINAL_IMAGE} ]] && echo "${GRN}BUILT IN $(format_time ${END} ${START})${RST}\n
-${BOLD}IMAGE:${RST} ${FINAL_IMAGE}\n
+[[ -f ${FINAL_IMAGE} ]] && echo "${GRN}BUILT IN $(format_time ${END} ${START})${RST}
+${BOLD}IMAGE:${RST} ${FINAL_IMAGE}
 ${BOLD}VERSION:${RST} $(cat out/include/config/kernel.release)" \
                       || echo -e "$Red Kernel build failed! $nocol"
