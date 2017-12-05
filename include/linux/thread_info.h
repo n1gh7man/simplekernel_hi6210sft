@@ -2,7 +2,8 @@
  *
  * Copyright (C) 2002  David Howells (dhowells@redhat.com)
  * - Incorporating suggestions made by Linus Torvalds
- * Copyright (c) 2014, NVIDIA CORPORATION.  All rights reserved.
+ * 
+ * Copyright (C) 2014, NVIDIA CORPORATION.  All rights reserved.
  */
 
 #ifndef _LINUX_THREAD_INFO_H
