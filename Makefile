@@ -385,7 +385,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -Wimplicit-function-declaration \
 		   -Wno-format-security \
 		   -fno-delete-null-pointer-checks \
-		   -mcpu=cortex-a53 -mtune=cortex-a53 -march=armv8-a \
+		   -mcpu=cortex-a53 -mtune=cortex-a53 \
 		   -fpredictive-commoning -fipa-cp-clone -ftree-vectorize -fgcse-after-reload \
 		   -std=gnu89
 

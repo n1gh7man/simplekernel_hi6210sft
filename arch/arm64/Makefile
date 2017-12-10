@@ -29,13 +29,6 @@ AS		+= -EL
 LD		+= -EL
 endif
 
-# hi6210sft optimizations
-arch-$(CONFIG_ARCH_HI6XXX)	:= $(call cc-option,-mcpu=cortex-a53,-march=armv8-a)
-tune-$(CONFIG_ARCH_HI6XXX)	:= -mtune=cortex-a53
-
-KBUILD_CFLAGS	+= $(arch-y) $(tune-y)
-KBUILD_AFLAGS	+= $(arch-y) $(tune-y)
-
 comma = ,
 
 CHECKFLAGS	+= -D__aarch64__
