@@ -781,6 +781,7 @@ static int hideep_parse_config(struct device_node *device, struct ts_device_data
 		//goto err;
 	}
 	if (1 == data->unite_cap_test_interface) {
+	/* END   PN: DTS2014101408241,Modified by l00216194, 2014/10/14*/
 		array_len = of_property_count_strings(device, "raw_data_limit");
 		if (array_len <= 0 || array_len > RAWDATA_NUM) {
 			TS_LOG_ERR("raw_data_limit length invaild or dts number is larger than:%d\n", array_len);

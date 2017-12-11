@@ -1225,6 +1225,12 @@ static ssize_t ts_register_store(struct device *dev, struct device_attribute *at
 		error = -EINVAL;
 		goto out;
 	}
+
+	if(strlen(buf) >= TS_MAX_REG_VALUE_NUM){
+		TS_LOG_ERR("Input too long\n");
+		return count;
+	}
+
 	value = (char *)kzalloc(TS_MAX_REG_VALUE_NUM, GFP_KERNEL);
 	if (!value) {
 		TS_LOG_ERR("value kzalloc error\n");
