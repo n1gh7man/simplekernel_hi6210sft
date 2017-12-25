@@ -362,6 +362,7 @@ service akmd09911 /system/bin/akmd09911
 
 on property:service.bootanim.exit=1	
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor optdemand
+    write /proc/sys/net/ipv4/tcp_congestion_control westwood
 
 on property:ro.runmode=factory	
     chown system system /proc/balong/ddr_test/hisi_dt_on
