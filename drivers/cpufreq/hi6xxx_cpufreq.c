@@ -359,10 +359,10 @@ static int _get_cluster_clk_and_freq_table(struct device *cpu_dev)
 	freq_table[cluster][3].index = 3;
     freq_table[cluster][3].frequency = 960000;
 	freq_table[cluster][4].index = 4;
-    freq_table[cluster][4].frequency = 1102000;
+    freq_table[cluster][4].frequency = 1200000;
 	freq_table[cluster][5].index = 5;
-    freq_table[cluster][5].frequency = 1200000;
-	freq_table[cluster][6].index = 7;
+    freq_table[cluster][5].frequency = 1500000;
+	freq_table[cluster][6].index = 6;
     freq_table[cluster][6].frequency = CPUFREQ_TABLE_END;
 
 	clk[cluster] = clk_get_sys(NULL, name);
